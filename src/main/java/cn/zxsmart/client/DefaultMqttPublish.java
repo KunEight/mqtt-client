@@ -40,6 +40,7 @@ public class DefaultMqttPublish implements MqttPublish {
         MqttPublishMessage publishMessage = MqttMessageBuilders.publish().topicName(topic)
                 .messageId(messageId).qos(qoS)
                 .retained(retain).payload(message).build();
+		message.release();	
         //创建缓存消息
         AbstractMqttMessage oriMessage = MessageFactory.create(channel, publishMessage, messageId,
                 eventLoopGroup.next(), mqttConfig, qoS, topic);
